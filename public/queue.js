@@ -1,6 +1,6 @@
 let songList;
 const getQueuedSongs  = async()=>{
-   await fetch("http://localhost:3000/getAllQueuedSongs")
+   await fetch("https://piedpiperplayer.herokuapp.com/getAllQueuedSongs")
         .then((res) => res.json())
         .then((res) => {
           // console.log(res)
@@ -40,7 +40,7 @@ function createElement(thumbnail,title,videoId,userName) {
 
 
 // Socket 
-var socket = io.connect('http://localhost:8080');
+var socket = io.connect('https://piedpiperplayer.herokuapp.com/');
 
 socket.on("connect", () => {
   console.log(socket.id); // x8WIv7-mJelg7on_ALbx

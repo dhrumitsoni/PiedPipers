@@ -59,7 +59,7 @@ function createElement(thumbnail, videoId, title) {
 
   // Adding event Listener to the "Add Song button";
   addtoPlaylistBtn.addEventListener("click", () => {
-    fetch("http://localhost:3000/addVideoToList", {
+    fetch("https://piedpiperplayer.herokuapp.com/addVideoToList", {
       method: "POST",
       headers: {
         Accept: "application/json, text/plain, */*",
