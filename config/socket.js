@@ -13,6 +13,6 @@ io.on("connection", socket => {
     console.log("Connected ")
 });
 
-httpServer.listen(process.env.PORT || 8080);
+//httpServer.listen(process.env.PORT || 8080);
 
 module.exports = io;
