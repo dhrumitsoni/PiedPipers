@@ -1,0 +1,8 @@
+1. Fix how to remove the jwt as it as expired. (Use expires in cookie)
+
+3. Email Verification.
+4. Search the YT from backend instead of frontend. 
+
+
+DOING:
+2. Create an endpoint named "GetQueuedSongs" to list all the queued songs.
