@@ -8,16 +8,20 @@ const addVideoTolist = async (req, res) => {
     videoId: req.body.videoId,
     thumbnail: req.body.thumbnail,
     title: req.body.title,
+    userName: null
   };
 
   try {
     // Step1 : Get the user form req.user.user_id
     const user = await User.findOne({ _id: req.user.user_id });
+    videoAddedbyUser.userName = user.username;
+
 
     // Step2 : check time difference between current time and last time he added song.
     // If time difference > 10 min Only then allow him to enter the song.
     const timeDifference = checkTimeDifference(user.lastSongAdded);
-    if (timeDifference >= 10) {
+
+    if (timeDifference >= 0) {
       console.log("Entered IF");
       // Step 3 : Now add the song to the queue and update users lastSongAdded.
       songList.push(videoAddedbyUser);
@@ -28,14 +32,17 @@ const addVideoTolist = async (req, res) => {
       console.log("Song Added");
       console.log(songList);
       // -------Sending a socket event to add the video to the list------------------
-      io.emit("addElementToQueue",videoAddedbyUser,user.username)
+      io.emit("addElementToQueue",videoAddedbyUser)
       // ------------------------------------------------------
-    } else {
+    } 
+    else {
       console.log("entered Else");
       //   else tell him to wait unitl his 10 min waiting period is over.
       return res.send(`Wait for ${timeDifference} min until next try:)`);
     }
-  } catch (error) {
+
+  } 
+  catch (error) {
     return res.send("Error: " + error);
   }
 };

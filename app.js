@@ -1,3 +1,5 @@
+const dotenv = require('dotenv')
+dotenv.config()
 const cookieParser = require('cookie-parser');
 const express = require('express');
 const path = require('path')
@@ -14,6 +16,6 @@ app.use(router);
 
 
 
-app.listen(process.env.PORT || 3000,()=>{
+app.listen(3000,()=>{
     console.log("Server running at 3000...")
 })

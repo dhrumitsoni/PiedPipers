@@ -8,6 +8,7 @@ const login = require('../controller/login')
 const addVideoTolist = require('../controller/addVideoToList');
 const getNextVideoId = require('../controller/getNextVideoId');
 const homePlayer = require('../controller/homePlayer');
+const verifyMailToken = require('../controller/verifyMailToken')
 
 // Joi schema
 const schemavalidation = require('../middleware/schemaValidate');
@@ -36,8 +37,13 @@ route.get('/login',(req,res)=>{
     res.sendFile(path.join(__dirname,'../public/login.html'))
 });
 
+// Post registration
 route.post('/register',schemavalidation(joiUserRegisterSchema),registration)
 
+// Verify order id.
+route.get('/verify/:id',verifyMailToken)
+
+// @Post login route
 route.post('/login',schemavalidation(joiUserLoginSchema),login);
 
 // Get the song name from the user

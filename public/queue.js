@@ -1,10 +1,11 @@
 let songList;
 const getQueuedSongs  = async()=>{
-   await fetch("https://piedpiperplayer.herokuapp.com/getAllQueuedSongs")
+   await fetch("http://localhost:3000/getAllQueuedSongs")
         .then((res) => res.json())
         .then((res) => {
-          // console.log(res)
-            songList = res
+          res.map(({thumbnail,title,videoId,userName})=>{
+              createElement(thumbnail,title,videoId,userName);
+          })
         });
 }
 
@@ -38,15 +39,21 @@ function createElement(thumbnail,title,videoId,userName) {
   
 }
 
+function clearAllElements() {
+  const insertElementHere = document.getElementById("insertElementHere")
+  insertElementHere.innerHTML = "";
+}
 
 // Socket 
-var socket = io.connect('https://piedpiperplayer.herokuapp.com/');
+var socket = io.connect('http://localhost:8080');
 
-socket.on("connect", () => {
+socket.on("connect", async () => {
   console.log(socket.id); // x8WIv7-mJelg7on_ALbx
+  clearAllElements()
+  await getQueuedSongs();
 
-  socket.on("addElementToQueue",(args,userName)=>{
-    const {thumbnail,title,videoId} = args;
+  socket.on("addElementToQueue",(userSong)=>{
+    const {thumbnail,title,videoId,userName} = userSong;
     createElement(thumbnail,title,videoId,userName)
   });
 });
