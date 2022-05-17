@@ -22,7 +22,7 @@ function sendMail(email,token) {
   `,
     html: `
     <p>Dear user,</p>    <p>Here is your email.</p>
-    <a href="http://localhost:3000/verify/${token}">http://localhost:3000/verify/${token}</a>
+    <a href="${process.env.ORIGIN_URL}verify/${token}">http://localhost:3000/verify/${token}</a>
   `,
   };
   sgMail.send(msg);

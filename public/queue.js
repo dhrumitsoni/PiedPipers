@@ -1,6 +1,6 @@
 let songList;
 const getQueuedSongs  = async()=>{
-   await fetch("http://localhost:3000/getAllQueuedSongs")
+   await fetch("https://piedpiperplayer.herokuapp.com/getAllQueuedSongs")
         .then((res) => res.json())
         .then((res) => {
           res.map(({thumbnail,title,videoId,userName})=>{

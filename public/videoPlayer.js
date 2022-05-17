@@ -55,7 +55,7 @@ function stopVideo() {
 
 // Fetch the next song that is to be played
 async function fetchNextVideo() {
-  await fetch("/getNextVideoId")
+  await fetch("https://piedpiperplayer.herokuapp.com/getNextVideoId")
         .then((res) => res.json())
         .then((res) => {
           console.log(res);
